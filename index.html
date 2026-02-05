@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Rengøring | Professionel datarengøring mens du sover</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+            line-height: 1.6; 
+            color: #1f2937;
+            background: #fff;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
+        /* Nav */
+        nav { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            background: rgba(255,255,255,0.95); 
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            z-index: 1000;
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; height: 72px; }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.25rem; color: #111; text-decoration: none; }
+        .logo span { font-size: 1.5rem; }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a { color: #4b5563; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: #2563eb; }
+        .nav-cta { background: #2563eb; color: white !important; padding: 10px 20px; border-radius: 50px; }
+        .mobile-menu { display: none; font-size: 1.5rem; background: none; border: none; cursor: pointer; }
+        
+        /* Hero */
+        .hero { 
+            padding: 140px 0 80px; 
+            background: linear-gradient(180deg, #eff6ff 0%, #fff 100%);
+            text-align: center;
+        }
+        .badge { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 8px; 
+            background: #dbeafe; 
+            color: #1d4ed8; 
+            padding: 8px 16px; 
+            border-radius: 50px; 
+            font-size: 0.875rem; 
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .badge .pulse { width: 8px; height: 8px; background: #2563eb; border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 24px; color: #111; }
+        .hero h1 span { color: #2563eb; }
+        .hero p { font-size: 1.25rem; color: #4b5563; max-width: 600px; margin: 0 auto 32px; }
+        .btn-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn { 
+            padding: 16px 32px; 
+            border-radius: 50px; 
+            font-weight: 600; 
+            text-decoration: none; 
+            transition: all 0.2s;
+            display: inline-block;
+        }
+        .btn-primary { background: #2563eb; color: white; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3); }
+        .btn-primary:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .btn-secondary { background: white; color: #374151; border: 2px solid #e5e7eb; }
+        .btn-secondary:hover { border-color: #d1d5db; }
+        .trust-badges { display: flex; gap: 24px; justify-content: center; margin-top: 40px; flex-wrap: wrap; }
+        .trust-badge { display: flex; align-items: center; gap: 8px; color: #6b7280; font-size: 0.875rem; }
+        .trust-badge svg { width: 20px; height: 20px; color: #22c55e; }
+        
+        /* Sections */
+        section { padding: 80px 0; }
+        .section-header { text-align: center; margin-bottom: 48px; }
+        .section-header h2 { font-size: 2.25rem; font-weight: 700; margin-bottom: 12px; color: #111; }
+        .section-header p { color: #6b7280; font-size: 1.125rem; }
+        
+        /* Services */
+        .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+        .service { 
+            background: #fff; 
+            border: 1px solid #e5e7eb; 
+            border-radius: 16px; 
+            padding: 32px 24px;
+            transition: all 0.2s;
+        }
+        .service:hover { box-shadow: 0 10px 40px rgba(0,0,0,0.08); border-color: #bfdbfe; }
+        .service-icon { font-size: 2.5rem; margin-bottom: 16px; display: block; }
+        .service h3 { font-size: 1.125rem; font-weight: 700; margin-bottom: 8px; }
+        .service p { color: #6b7280; font-size: 0.9375rem; line-height: 1.6; }
+        
+        /* How it works */
+        .how-it-works { background: #f9fafb; }
+        .steps { max-width: 600px; margin: 0 auto; }
+        .step { display: flex; gap: 20px; margin-bottom: 32px; }
+        .step:last-child { margin-bottom: 0; }
+        .step-number { 
+            flex-shrink: 0; 
+            width: 48px; 
+            height: 48px; 
+            background: #2563eb; 
+            color: white; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 700; 
+            font-size: 1.125rem;
+        }
+        .step-content h3 { font-size: 1.125rem; font-weight: 700; margin-bottom: 4px; }
+        .step-content p { color: #6b7280; }
+        
+        /* Pricing */
+        .pricing-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto; }
+        .pricing-card { 
+            background: #fff; 
+            border: 2px solid #e5e7eb; 
+            border-radius: 20px; 
+            padding: 32px;
+            position: relative;
+        }
+        .pricing-card.popular { 
+            background: #2563eb; 
+            border-color: #2563eb; 
+            color: white; 
+            transform: scale(1.02);
+        }
+        .popular-badge { 
+            position: absolute; 
+            top: -12px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            background: #22c55e; 
+            color: white; 
+            padding: 6px 16px; 
+            border-radius: 50px; 
+            font-size: 0.75rem; 
+            font-weight: 700;
+        }
+        .pricing-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; }
+        .pricing-card .subtitle { font-size: 0.875rem; margin-bottom: 16px; }
+        .pricing-card.popular .subtitle { color: #bfdbfe; }
+        .pricing-card .price { font-size: 3rem; font-weight: 800; margin-bottom: 8px; }
+        .pricing-card .price span { font-size: 1.125rem; font-weight: 500; }
+        .pricing-card .desc { font-size: 0.9375rem; margin-bottom: 24px; }
+        .pricing-card.popular .desc { color: #dbeafe; }
+        .features { list-style: none; margin-bottom: 24px; }
+        .features li { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            margin-bottom: 12px; 
+            font-size: 0.9375rem;
+        }
+        .features li svg { width: 20px; height: 20px; color: #22c55e; flex-shrink: 0; }
+        .pricing-card.popular .features li svg { color: #86efac; }
+        .pricing-card.popular .btn { background: white; color: #2563eb; }
+        .pricing-card.popular .btn:hover { background: #f3f4f6; }
+        .pricing-card .btn { display: block; text-align: center; }
+        .pricing-note { text-align: center; color: #9ca3af; font-size: 0.875rem; margin-top: 24px; }
+        
+        /* Testimonial */
+        .testimonial { background: #f9fafb; }
+        .testimonial-card { 
+            background: #fff; 
+            border-radius: 20px; 
+            padding: 40px; 
+            max-width: 700px; 
+            margin: 0 auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .stars { font-size: 1.5rem; margin-bottom: 20px; letter-spacing: 4px; }
+        .testimonial-text { font-size: 1.125rem; color: #4b5563; font-style: italic; margin-bottom: 24px; line-height: 1.7; }
+        .testimonial-author { display: flex; align-items: center; justify-content: center; gap: 16px; }
+        .author-avatar { 
+            width: 48px; 
+            height: 48px; 
+            background: #dbeafe; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 700; 
+            color: #2563eb;
+        }
+        .author-info { text-align: left; }
+        .author-name { font-weight: 700; color: #111; }
+        .author-title { font-size: 0.875rem; color: #6b7280; }
+        
+        /* FAQ */
+        .faq-list { max-width: 700px; margin: 0 auto; }
+        .faq-item { 
+            background: #fff; 
+            border: 1px solid #e5e7eb; 
+            border-radius: 12px; 
+            padding: 24px; 
+            margin-bottom: 16px;
+        }
+        .faq-item h3 { font-size: 1.0625rem; font-weight: 600; margin-bottom: 8px; color: #111; }
+        .faq-item p { color: #6b7280; font-size: 0.9375rem; }
+        
+        /* CTA */
+        .cta { background: #2563eb; color: white; text-align: center; }
+        .cta h2 { font-size: 2.25rem; font-weight: 700; margin-bottom: 12px; }
+        .cta > p { color: #bfdbfe; font-size: 1.125rem; margin-bottom: 40px; }
+        .contact-card { 
+            background: #fff; 
+            border-radius: 20px; 
+            padding: 32px; 
+            max-width: 400px; 
+            margin: 0 auto;
+            color: #1f2937;
+        }
+        .contact-item { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+        .contact-item:last-child { margin-bottom: 0; }
+        .contact-icon { 
+            width: 48px; 
+            height: 48px; 
+            background: #eff6ff; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+        .contact-icon svg { width: 24px; height: 24px; color: #2563eb; }
+        .contact-info { text-align: left; }
+        .contact-label { font-size: 0.875rem; color: #6b7280; }
+        .contact-value { font-weight: 600; color: #111; text-decoration: none; }
+        .contact-value:hover { color: #2563eb; }
+        .contact-divider { border-top: 1px solid #e5e7eb; margin: 24px 0; padding-top: 24px; }
+        .contact-tip { font-size: 0.9375rem; color: #6b7280; }
+        .contact-tip strong { color: #111; }
+        
+        /* Footer */
+        footer { background: #111827; color: #9ca3af; padding: 32px 0; }
+        footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        footer .logo { color: white; font-size: 1.125rem; }
+        footer a { color: #9ca3af; text-decoration: none; }
+        footer a:hover { color: white; }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu { display: block; }
+            .hero h1 { font-size: 2.25rem; }
+            .hero { padding: 120px 0 60px; }
+            section { padding: 60px 0; }
+            .section-header h2 { font-size: 1.75rem; }
+            .pricing-card.popular { transform: none; }
+            footer .container { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">
+                <span>🧹</span>
+                Digital Rengøring
+            </a>
+            <div class="nav-links">
+                <a href="#how-it-works">Sådan virker det</a>
+                <a href="#pricing">Priser</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact" class="nav-cta">Kom i gang</a>
+            </div>
+            <button class="mobile-menu">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="badge">
+                <span class="pulse"></span>
+                🚀 Første kunde får 50% rabat
+            </div>
+            <h1>Stop med at spilde tid på <span>rodde Excel-filer</span></h1>
+            <p>Send din fil kl. 18. Vågn op til en professionelt rengjort fil kl. 08. Fast pris. Ingen overraskelser. 100% tilfredshedsgaranti.</p>
+            <div class="btn-group">
+                <a href="#contact" class="btn btn-primary">Få et tilbud nu</a>
+                <a href="#how-it-works" class="btn btn-secondary">Se hvordan det virker</a>
+            </div>
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    Levering inden for 24t
+                </div>
+                <div class="trust-badge">
+                    <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    Faste priser
+                </div>
+                <div class="trust-badge">
+                    <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    Dansk ejer
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Hvad jeg fixer</h2>
+                <p>Fra simple oprydninger til komplekse migreringer. Jeg klarer det hele mens du sover.</p>
+            </div>
+            <div class="services">
+                <div class="service">
+                    <span class="service-icon">📊</span>
+                    <h3>Excel & CSV</h3>
+                    <p>Fjerner dubletter, fixer formater, kombinerer filer, rydder op i rod.</p>
+                </div>
+                <div class="service">
+                    <span class="service-icon">🛍️</span>
+                    <h3>Webshop-data</h3>
+                    <p>Migrering mellem Shopify, Etsy, WooCommerce. Produktlister rettet op.</p>
+                </div>
+                <div class="service">
+                    <span class="service-icon">👥</span>
+                    <h3>Kontaktliste</h3>
+                    <p>Validering af emails og telefonnumre. Dubletter fjernet. GDPR-klar.</p>
+                </div>
+                <div class="service">
+                    <span class="service-icon">📋</span>
+                    <h3>Konvertering</h3>
+                    <p>CSV ↔ JSON ↔ XML. Tegnsæt fixet. Datoer og valuta standardiseret.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>Sådan virker det</h2>
+                <p>4 simple trin fra rod til rent</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Send din fil</h3>
+                        <p>Email mig din fil med en kort beskrivelse af, hvad der skal fixes. Modtagelse bekræftes inden for 1 time.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Få fast pris</h3>
+                        <p>Jeg analyserer din fil og sender et tilbud inden for 2 timer. Ingen skjulte gebyrer, ingen binding.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Betal nemt</h3>
+                        <p>Godkend tilbuddet og betal via MobilePay. Nemt, hurtigt og sikkert.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Modtag resultatet</h3>
+                        <p>Jeg arbejder natten over. Du vågner til en professionelt rengjort fil i din indbakke.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Faste, gennemsigtige priser</h2>
+                <p>Ingen timepriser. Ingen overraskelser. Du ved præcis, hvad du betaler.</p>
+            </div>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>Lille</h3>
+                    <p class="subtitle" style="color: #6b7280;">Op til 1.000 rækker</p>
+                    <div class="price">299<span> kr</span></div>
+                    <p class="desc">Perfekt til små lister og hurtige fixes</p>
+                    <ul class="features">
+                        <li><svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Dubletter fjernet</li>
+                        <li><svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Formatering fixet</li>
+                        <li><svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Levering inden for 24t</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-secondary">Vælg Lille</a>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="popular-badge">MEST POPULÆR</div>
+                    <h3>Medium</h3>
+                    <p class="subtitle">1.000 - 10.000 rækker</p>
+                    <div class="price">799<span> kr</span></div>
+                    <p class="desc">Standard for webshops og kontaktliste</p>
+                    <ul class="features">
+                        <li><svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Alt fra Lille</li>
+                        <li><svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Data-validering</li>
+                        <li><svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Rapport inkluderet</li>
+                        <li><svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Prioriteret support</li>
+                    </ul>
+                    <a href="#contact" class="btn">Vælg Medium</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Stor</h3>
+                    <p class="subtitle" style="color: #6b7280;">10.000+ rækker</p>
+                    <div class="price">1.499<span> kr</span></div>
+                    <p class="desc">Store migreringer og komplekse projekter</p>
+                    <ul class="features">
+                        <li><svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Alt fra Medium</li>
+                        <li><svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Komplekse migreringer</li>
+                        <li><svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Tilpasset løsning</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-secondary">Vælg Stor</a>
+                </div>
+            </div>
+            <p class="pricing-note">* Ved særligt komplekse opgaver aftales pris forinden. Ingen arbejde påbegyndes uden godkendelse.</p>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="testimonial">
+        <div class="container">
+            <div class="section-header">
+                <h2>Hvad kunder siger</h2>
+                <p>Din anmeldelse kan komme her</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Jeg havde en produktliste med over 2000 varer fra min gamle webshop, der var helt ude af kontrol. Om morgenen havde jeg en perfekt struktureret fil klar til min nye Shopify-butik. Det sparede mig uger af arbejde!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MK</div>
+                    <div class="author-info">
+                        <div class="author-name">Maria K.</div>
+                        <div class="author-title">Ejer, Nordic Home Decor</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Ofte stillede spørgsmål</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3>Hvor hurtigt får jeg min fil tilbage?</h3>
+                    <p>Som regel natten over. Hvis du sender filen inden kl. 18, ligger den rensede fil i din indbakke næste morgen kl. 08. Ved større projekter aftales tidsplanen på forhånd.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Er mine data sikre?</h3>
+                    <p>Ja. Jeg behandler alle data fortroligt og sletter filerne permanent efter levering og din godkendelse. Ingen data deles med tredjepart.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Hvad hvis jeg ikke er tilfreds?</h3>
+                    <p>Jeg tilbyder 100% tilfredshedsgaranti. Hvis resultatet ikke lever op til dine forventninger, retter jeg det uden ekstra omkostninger.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Kan du håndtere fortrolige data?</h3>
+                    <p>Ja. Jeg har erfaring med persondata og følger gældende GDPR-regler. Data behandles sikkert og fortroligt.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Hvilke filformater accepterer du?</h3>
+                    <p>Excel (.xlsx, .xls), CSV, JSON, XML og de fleste andre almindelige formater. Er du i tvivl, så spørg!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact" class="cta">
+        <div class="container">
+            <h2>Klar til at få ryddet op?</h2>
+            <p>Send din fil nu og vågn op til professionelt rengjorte data.</p>
+            <div class="contact-card">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-label">Email</div>
+                        <a href="mailto:baandrupbobpc@gmail.com" class="contact-value">baandrupbobpc@gmail.com</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-label">MobilePay</div>
+                        <span class="contact-value">+45 31 10 59 16</span>
+                    </div>
+                </div>
+                <div class="contact-divider">
+                    <p class="contact-tip">💡 <strong>Tip:</strong> Vedhæft din fil og beskriv kort, hvad der skal fixes. Jeg vender tilbage inden for 2 timer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <a href="#" class="logo">
+                <span>🧹</span>
+                Digital Rengøring
+            </a>
+            <p>© 2025 Digital Rengøring. Dansk ejer.</p>
+            <div style="display: flex; gap: 24px;">
+                <a href="mailto:baandrupbobpc@gmail.com">Kontakt</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
